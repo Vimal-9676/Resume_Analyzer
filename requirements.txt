@@ -2,4 +2,4 @@ flask
 PyPDF2
 scikit-learn
 gunicorn
-google-generativeai
+google-genai

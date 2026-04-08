@@ -1,20 +1,6 @@
-from flask import request, render_template
+from flask import Flask, request, render_template
 
-def get_ai_feedback(resume_text, job_desc, score):
-    # TODO: Implement AI feedback logic
-    pass
-
-def extract_skill_scores(resume_text):
-    # TODO: Implement skill extraction and scoring logic
-    pass
-
-def extract_text_from_pdf(file):
-    # TODO: Implement PDF text extraction
-    pass
-
-def calculate_match(resume_text, job_desc):
-    # TODO: Implement matching logic
-    pass
+app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -57,4 +43,4 @@ def index():
         error=error
     )
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=10000)

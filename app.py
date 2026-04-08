@@ -1,8 +1,20 @@
-from flask import Flask, render_template, request
-from utils import extract_text_from_pdf, calculate_match, extract_skill_scores
-from ai import get_ai_feedback
+from flask import request, render_template
 
-app = Flask(__name__)
+def get_ai_feedback(resume_text, job_desc, score):
+    # TODO: Implement AI feedback logic
+    pass
+
+def extract_skill_scores(resume_text):
+    # TODO: Implement skill extraction and scoring logic
+    pass
+
+def extract_text_from_pdf(file):
+    # TODO: Implement PDF text extraction
+    pass
+
+def calculate_match(resume_text, job_desc):
+    # TODO: Implement matching logic
+    pass
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -10,36 +22,39 @@ def index():
     missing_skills = []
     feedback = None
     skill_data = None
+    error = None
 
     if request.method == 'POST':
         try:
-            file = request.files['resume']
-            job_desc = request.form['job_desc']
+            file = request.files.get('resume')
+            job_desc = request.form.get('job_desc')
 
-            if file.filename == "":
-                return render_template('index.html', error="Please upload a file")
+            if not file or file.filename == "":
+                error = "Please upload a resume"
+                return render_template('index.html', error=error)
 
             resume_text = extract_text_from_pdf(file)
 
             score, missing_skills = calculate_match(resume_text, job_desc)
 
-            # AI call (safe)
+            # Safe AI call
             try:
                 feedback = get_ai_feedback(resume_text, job_desc, score)
-            except:
-                feedback = "⚠️ AI is busy. Try again later."
+            except Exception as e:
+                feedback = "⚠️ AI is busy. Please try again."
 
             skill_data = extract_skill_scores(resume_text)
 
         except Exception as e:
-            return render_template('index.html', error=str(e))
+            error = str(e)
 
     return render_template(
         'index.html',
         score=score,
         missing_skills=missing_skills,
         feedback=feedback,
-        skill_data=skill_data
+        skill_data=skill_data,
+        error=error
     )
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

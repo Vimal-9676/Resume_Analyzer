@@ -1,15 +1,28 @@
 import PyPDF2
+import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 def extract_text_from_pdf(file):
-    reader = PyPDF2.PdfReader(file)
-    text = ""
-    for page in reader.pages:
-        text += page.extract_text()
-    return text
+    try:
+        reader = PyPDF2.PdfReader(file)
+        text = ""
+
+        for page in reader.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text
+
+        return text.strip()
+
+    except Exception as e:
+        print("PDF ERROR:", e)
+        return ""
 
 def calculate_match(resume, job_desc):
+    if not resume or not job_desc:
+        return 0, ["Invalid input"]
+
     text = [resume, job_desc]
 
     cv = CountVectorizer().fit_transform(text)
@@ -17,11 +30,12 @@ def calculate_match(resume, job_desc):
 
     score = round(similarity * 100, 2)
 
-    # simple skill gap logic
-    jd_words = set(job_desc.lower().split())
-    resume_words = set(resume.lower().split())
+    jd_words = set(re.findall(r'\b\w+\b', job_desc.lower()))
+    resume_words = set(re.findall(r'\b\w+\b', resume.lower()))
 
     missing = list(jd_words - resume_words)[:10]
+
+    return score, missing
 
     return score, missing
 def extract_skill_scores(resume_text):

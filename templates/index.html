@@ -12,8 +12,7 @@
         <h1>Resume Analyzer</h1>
 
         {% if error %}
-        <div class="error-box">
-            {{error}}
+        <p style="color:red;">{{ error }}</p>
         </div>
         {% endif %}
 
@@ -29,12 +28,12 @@
                 <div id="fileName"></div>
             </div><br><br>
             <textarea name="job_desc" placeholder="Paste Job Description"></textarea><br><br>
-            <button type="submit" onclick="this.innerText='Analyzing...'; this.disabled=true;">
+            <button type="submit">
                 Analyze
             </button>
         </form>
 
-        {% if score %}
+        {% if score is not none %}
         <h2>Match Score: {{score}}%</h2>
         <h3>Missing Skills:</h3>
         <ul>

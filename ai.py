@@ -1,15 +1,19 @@
-from google import genai
-import time
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-client = genai.Client(api_key="AIzaSyC2eTBTwODgsGMxGDvIUFKyWaESTAcit-4")
+load_dotenv()
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_ai_feedback(resume_text, job_desc, score):
+    try:
+        model = model = genai.GenerativeModel("gemini-2.5-flash")
 
-    prompt = f"""
+        prompt = f"""
 You are an ATS resume expert.
 
 Resume:
-{resume_text}
+{resume_text[:2000]}
 
 Job Description:
 {job_desc}
@@ -22,17 +26,10 @@ Give:
 - Improvements
 """
 
-    for attempt in range(3):  # retry 3 times
-        try:
-            response = client.models.generate_content(
-                model="models/gemini-2.0-flash",  # use your working model
-                contents=prompt
-            )
-            return response.text
+        response = model.generate_content(prompt)
 
-        except Exception as e:
-            print(f"Retry {attempt+1} due to error:", e)
-            time.sleep(2)
+        return response.text if response.text else "No response from AI"
 
-    return "⚠️ AI is busy right now. Please try again later."
-
+    except Exception as e:
+        print("AI ERROR:", e)
+        return "⚠️ AI failed. Try again."

@@ -1,0 +1,192 @@
+/* ===== Global ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #1e293b, #0f172a);
+    padding: 20px;
+}
+
+/* ===== Main Card ===== */
+.container {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    color: white;
+    text-align: center;
+}
+
+/* ===== Title ===== */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ===== File Input ===== */
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+}
+
+/* ===== Textarea ===== */
+textarea {
+    width: 100%;
+    height: 120px;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+}
+
+/* Placeholder */
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== Button ===== */
+button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* ===== Results ===== */
+.result {
+    margin-top: 25px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result h2 {
+    color: #a78bfa;
+    margin-bottom: 10px;
+}
+
+.result h3 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* ===== Missing Skills List ===== */
+.result ul {
+    margin-top: 10px;
+    list-style: none;
+}
+
+.result li {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    border-left: 3px solid #8b5cf6;
+}
+
+/* ===== Small Animation ===== */
+.container {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ===== Upload Box ===== */
+.upload-box {
+    width: 100%;
+    padding: 25px;
+    margin: 15px 0;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-box:hover {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+/* Upload text */
+.upload-content p {
+    margin: 0;
+    font-size: 15px;
+    color: white;
+}
+
+.upload-content span {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* File name display */
+#fileName {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #a78bfa;
+}
+.feedback {
+    background: rgba(255,255,255,0.08);
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 4px solid #22c55e;
+    margin-top: 10px;
+    white-space: pre-line;
+    font-size: 14px;
+}
+.error-box {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff6b6b;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}

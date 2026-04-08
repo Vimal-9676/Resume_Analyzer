@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Resume Analyzer</h1>
+
+        {% if error %}
+        <div class="error-box">
+            {{error}}
+        </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="upload-box" id="uploadBox">
+                <input type="file" name="resume" id="fileInput" hidden required>
+
+                <div class="upload-content">
+                    <p>📄 Drag & Drop your Resume here</p>
+                    <span>or click to browse</span>
+                </div>
+
+                <div id="fileName"></div>
+            </div><br><br>
+            <textarea name="job_desc" placeholder="Paste Job Description"></textarea><br><br>
+            <button type="submit" onclick="this.innerText='Analyzing...'">
+                Analyze
+            </button>
+        </form>
+
+        {% if score %}
+        <h2>Match Score: {{score}}%</h2>
+        <h3>Missing Skills:</h3>
+        <ul>
+            {% for skill in missing_skills %}
+            <li>{{skill}}</li>
+            {% endfor %}
+        </ul>
+        <h3>🤖 AI Feedback</h3>
+        <div class="feedback">
+            {{feedback}}
+        </div>
+    </div>
+
+    {% endif %}
+    <script>
+        const uploadBox = document.getElementById("uploadBox");
+        const fileInput = document.getElementById("fileInput");
+        const fileName = document.getElementById("fileName");
+
+        // click to open file picker
+        uploadBox.addEventListener("click", () => {
+            fileInput.click();
+        });
+
+        // show selected file name
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = "Selected: " + fileInput.files[0].name;
+            }
+        });
+
+        // drag & drop support
+        uploadBox.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            uploadBox.style.borderColor = "#8b5cf6";
+        });
+
+        uploadBox.addEventListener("dragleave", () => {
+            uploadBox.style.borderColor = "rgba(255,255,255,0.4)";
+        });
+
+        uploadBox.addEventListener("drop", (e) => {
+            e.preventDefault();
+            fileInput.files = e.dataTransfer.files;
+
+            fileName.textContent = "Selected: " + fileInput.files[0].name;
+        });
+    </script>
+</body>
+
+
+</html>

@@ -45,30 +45,8 @@ An AI-powered Resume Analyzer that evaluates resumes against job descriptions an
 
 ---
 
-## 📂 Project Structure
-Resume-Analyzer/
-│
-├── app.py
-├── ai.py
-├── utils.py
-├── requirements.txt
-├── .gitignore
-├── Procfile (optional for Render)
-├── templates/
-│ └── index.html
-├── static/
-└── README.md
+## 📦 Run Locally
 
-# Clone repository
-git clone https://github.com/your-username/resume-analyzer.git
-
-cd resume-analyzer
-
-# Install dependencies
+```bash
 pip install -r requirements.txt
-
-# Run Flask app
 python app.py
-
-#Open Browser
-http://127.0.0.1:5000

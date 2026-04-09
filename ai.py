@@ -1,16 +1,25 @@
-import google.generativeai as genai
+from google import genai
 import os
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+# Create client (NEW WAY)
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_ai_feedback(resume_text, job_desc, score):
     try:
-        model = model = genai.GenerativeModel("gemini-2.5-flash")
-
         prompt = f"""
 You are an ATS resume expert.
+
+Analyze the resume against the job description.
+
+Return structured feedback:
+
+- Feedback
+- Missing skills
+- Improvements
 
 Resume:
 {resume_text[:2000]}
@@ -18,15 +27,14 @@ Resume:
 Job Description:
 {job_desc}
 
-Score: {score}
-
-Give:
-- Feedback
-- Missing skills
-- Improvements
+ATS Score:
+{score}
 """
 
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
 
         return response.text if response.text else "No response from AI"
 

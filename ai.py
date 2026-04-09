@@ -6,7 +6,7 @@ import time
 load_dotenv()
 
 # Create client (NEW WAY)
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+client = genai.Client(api_key=os.getenv("Gemini_API_Key"))
 
 def get_ai_feedback(resume_text, job_desc, score):
     try:

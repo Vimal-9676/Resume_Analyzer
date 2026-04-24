@@ -35,6 +35,19 @@ It uses **Google Gemini AI** to generate insights, match skills, and provide per
 
 ---
 
+## Screenshorts
+
+### Home
+![Home](home.png)
+
+### Upload
+![Upload](upload.png)
+
+### Result
+![Result](result.png)
+
+---
+
 ## 🛠️ Tech Stack
 
 <div align="center">
